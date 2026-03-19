@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121212">
+
+    <!-- Puntuación -->
+
+    <!-- Nivel o modo -->
+    <TextView
+        android:id="@+id/tvPuntuacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="0"
+        android:layout_column="1"
+        android:layout_marginTop="160dp"
+        android:text="Puntuación: 00000"
+        android:textColor="#FFFFFF"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <GridLayout
+        android:id="@+id/gridAgujeros"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="0"
+        android:layout_column="1"
+        android:layout_gravity="center"
+        android:layout_marginTop="56dp"
+        android:alignmentMode="alignMargins"
+        android:columnCount="3"
+        android:rowCount="3"
+        android:useDefaultMargins="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvNivel">
+
+        <!-- 9 agujeros (ImageButton vacíos por ahora) -->
+        <ImageButton
+            android:id="@+id/btnAgujero1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@android:color/darker_gray"
+            android:contentDescription="Agujero 1" />
+
+        <ImageButton
+            android:id="@+id/btnAgujero2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@android:color/darker_gray"
+            android:contentDescription="Agujero 2" />
+
+        <ImageButton
+            android:id="@+id/btnAgujero3"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@android:color/darker_gray"
+            android:contentDescription="Agujero 3" />
+
+        <ImageButton
+            android:id="@+id/btnAgujero4"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@android:color/darker_gray"
+            android:contentDescription="Agujero 4" />
+
+        <ImageButton
+            android:id="@+id/btnAgujero5"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@android:color/darker_gray"
+            android:contentDescription="Agujero 5" />
+
+        <ImageButton
+            android:id="@+id/btnAgujero6"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@android:color/darker_gray"
+            android:contentDescription="Agujero 6" />
+
+        <ImageButton
+            android:id="@+id/btnAgujero7"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@android:color/darker_gray"
+            android:contentDescription="Agujero 7" />
+
+        <ImageButton
+            android:id="@+id/btnAgujero8"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@android:color/darker_gray"
+            android:contentDescription="Agujero 8" />
+
+        <ImageButton
+            android:id="@+id/btnAgujero9"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@android:color/darker_gray"
+            android:contentDescription="Agujero 9" />
+    </GridLayout>
+
+    <TextView
+        android:id="@+id/tvNivel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="0"
+        android:layout_column="1"
+        android:layout_marginTop="60dp"
+        android:text="Nivel ## o Arcade"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvPuntuacion" />
+
+    <!-- Cuadrícula 3x3 para agujeros -->
+
+    <!-- Botón regresar circular -->
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@android:color/transparent"
+        android:src="@android:drawable/ic_media_previous"
+        android:scaleType="centerInside"
+        android:tint="#FFFFFF"
+        android:contentDescription="Botón regresar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="180dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
