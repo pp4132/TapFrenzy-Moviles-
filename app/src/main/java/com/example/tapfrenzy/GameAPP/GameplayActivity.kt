@@ -16,6 +16,12 @@ class GameplayActivity : AppCompatActivity() {
     lateinit var btnBack: ImageButton
     lateinit var agujeros: List<ImageButton>
 
+    var puntuacion = 0
+    var indiceTopoActual = -1
+    var juegoActivo = true
+
+    val handler = android.os.Handler(android.os.Looper.getMainLooper())
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -42,7 +48,59 @@ class GameplayActivity : AppCompatActivity() {
             findViewById(R.id.btnAgujero9)
         )
 
-        btnBack.setOnClickListener { finish() }
+        agujeros.forEachIndexed { index, boton ->
+            boton.setOnClickListener {
+                if (index == indiceTopoActual) {
+                    puntuacion += 10
+                    actualizarPuntuacion()
+                    ocultarTopo()
+                }
+            }
+        }
 
+        iniciarJuego()
+
+        btnBack.setOnClickListener { finish() }
     }
+
+    fun mostrarTopo() {
+        if (!juegoActivo) return
+
+        ocultarTopo()
+
+        indiceTopoActual = (0..8).random()
+
+        agujeros[indiceTopoActual].setBackgroundColor(
+            getColor(android.R.color.holo_green_light)
+        )
+
+        handler.postDelayed({
+            ocultarTopo()
+        }, 800)
+    }
+
+    fun ocultarTopo() {
+        if (indiceTopoActual != -1) {
+            agujeros[indiceTopoActual].setBackgroundColor(
+                getColor(android.R.color.darker_gray)
+            )
+            indiceTopoActual = -1
+        }
+    }
+
+    fun iniciarJuego() {
+        handler.post(object : Runnable {
+            override fun run() {
+                if (juegoActivo) {
+                    mostrarTopo()
+                    handler.postDelayed(this, 1200)
+                }
+            }
+        })
+    }
+
+    fun actualizarPuntuacion() {
+        tvPuntuacion.text = "Puntuación: $puntuacion"
+    }
+
 }

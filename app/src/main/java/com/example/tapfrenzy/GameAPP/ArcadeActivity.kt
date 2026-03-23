@@ -1,5 +1,6 @@
 package com.example.tapfrenzy.GameAPP
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
@@ -21,13 +22,15 @@ class ArcadeActivity : AppCompatActivity() {
         }
 
         val btnBack = findViewById<ImageButton>(R.id.btnBack)
-        btnBack.setOnClickListener {
-            finish()
+        val btnJugar = findViewById<Button>(R.id.btnJugar)
+
+        btnJugar.setOnClickListener {
+            val intent = Intent(this, GameplayActivity::class.java)
+            startActivity(intent)
         }
 
-        val btnJugar = findViewById<Button>(R.id.btnJugar)
-        btnJugar.setOnClickListener {
-            // Aquí arrancará el juego (lógica de aparición del topo)
+        btnBack.setOnClickListener {
+            finish()
         }
     }
 }

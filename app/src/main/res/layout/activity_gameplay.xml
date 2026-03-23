@@ -7,16 +7,13 @@
     android:layout_height="match_parent"
     android:background="#121212">
 
-    <!-- Puntuación -->
-
-    <!-- Nivel o modo -->
     <TextView
         android:id="@+id/tvPuntuacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_row="0"
         android:layout_column="1"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="140dp"
         android:text="Puntuación: 00000"
         android:textColor="#FFFFFF"
         android:textSize="22sp"
@@ -25,6 +22,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/tvNivel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="0"
+        android:layout_column="1"
+        android:layout_marginTop="64dp"
+        android:text="Nivel ## o Arcade"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvPuntuacion" />
+
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_margin="180dp"
+        android:layout_marginStart="180dp"
+        android:layout_marginBottom="196dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Botón regresar"
+        android:scaleType="centerInside"
+        android:src="@android:drawable/ic_media_previous"
+        app:tint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <GridLayout
         android:id="@+id/gridAgujeros"
         android:layout_width="wrap_content"
@@ -32,7 +59,7 @@
         android:layout_row="0"
         android:layout_column="1"
         android:layout_gravity="center"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="52dp"
         android:alignmentMode="alignMargins"
         android:columnCount="3"
         android:rowCount="3"
@@ -107,34 +134,4 @@
             android:contentDescription="Agujero 9" />
     </GridLayout>
 
-    <TextView
-        android:id="@+id/tvNivel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_row="0"
-        android:layout_column="1"
-        android:layout_marginTop="60dp"
-        android:text="Nivel ## o Arcade"
-        android:textColor="#FFFFFF"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvPuntuacion" />
-
-    <!-- Cuadrícula 3x3 para agujeros -->
-
-    <!-- Botón regresar circular -->
-    <ImageButton
-        android:id="@+id/btnBack"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:background="@android:color/transparent"
-        android:src="@android:drawable/ic_media_previous"
-        android:scaleType="centerInside"
-        android:tint="#FFFFFF"
-        android:contentDescription="Botón regresar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="180dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
