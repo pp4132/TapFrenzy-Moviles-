@@ -11,6 +11,15 @@ import com.example.tapfrenzy.R
 
 class GameplayActivity : AppCompatActivity() {
 
+    companion object {
+        const val EXTRA_MODO = "modo"
+        const val EXTRA_INTERVALO = "intervalo_inicial"
+        const val EXTRA_NIVEL = "nivel"
+
+        const val MODO_ARCADE = "arcade"
+        const val MODO_NIVEL = "nivel"
+    }
+
     lateinit var tvPuntuacion: TextView
     lateinit var tvNivel: TextView
     lateinit var btnBack: ImageButton
@@ -19,22 +28,46 @@ class GameplayActivity : AppCompatActivity() {
     var puntuacion = 0
     var indiceTopoActual = -1
     var juegoActivo = true
+    var intervalo = 1200L
+    var modo = MODO_NIVEL
+    var nivel = 1
+    var topoGolpeado = false
+    var duracion = 30000L
 
     val handler = android.os.Handler(android.os.Looper.getMainLooper())
+    lateinit var gameRunnable: Runnable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_gameplay)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
+        // 🔹 Recibir datos
+        modo = intent.getStringExtra(EXTRA_MODO) ?: MODO_NIVEL
+        nivel = intent.getIntExtra(EXTRA_NIVEL, 1)
+        intervalo = intent.getLongExtra(EXTRA_INTERVALO, 1200L)
+
         tvPuntuacion = findViewById(R.id.tvPuntuacion)
         tvNivel = findViewById(R.id.tvNivel)
         btnBack = findViewById(R.id.btnBack)
+
+        // 🔹 Configurar modo
+        if (modo == MODO_ARCADE) {
+            intervalo = 1300L
+            duracion = 45000L
+            tvNivel.text = "Modo Arcade"
+        } else {
+            duracion = 20000L + (nivel * 5000L)
+            tvNivel.text = "Nivel $nivel"
+        }
+
+        actualizarPuntuacion()
 
         agujeros = listOf(
             findViewById(R.id.btnAgujero1),
@@ -48,10 +81,12 @@ class GameplayActivity : AppCompatActivity() {
             findViewById(R.id.btnAgujero9)
         )
 
+        // 🔹 Clicks
         agujeros.forEachIndexed { index, boton ->
             boton.setOnClickListener {
-                if (index == indiceTopoActual) {
+                if (index == indiceTopoActual && indiceTopoActual != -1) {
                     puntuacion += 10
+                    topoGolpeado = true
                     actualizarPuntuacion()
                     ocultarTopo()
                 }
@@ -59,26 +94,55 @@ class GameplayActivity : AppCompatActivity() {
         }
 
         iniciarJuego()
+        iniciarTemporizador()
 
         btnBack.setOnClickListener {
             finish()
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        juegoActivo = false
+        handler.removeCallbacks(gameRunnable)
+    }
+
+    fun iniciarJuego() {
+        gameRunnable = object : Runnable {
+            override fun run() {
+                if (juegoActivo) {
+                    mostrarTopo()
+
+                    if (modo == MODO_ARCADE) {
+                        intervalo -= 20
+                        intervalo = maxOf(400L, intervalo)
+                    }
+
+                    handler.postDelayed(this, intervalo)
+                }
+            }
+        }
+        handler.post(gameRunnable)
+    }
+
     fun mostrarTopo() {
         if (!juegoActivo) return
 
         ocultarTopo()
-
         indiceTopoActual = (0..8).random()
+        topoGolpeado = false
 
         agujeros[indiceTopoActual].setBackgroundColor(
             getColor(android.R.color.holo_green_light)
         )
 
         handler.postDelayed({
+            if (!topoGolpeado && indiceTopoActual != -1) {
+                puntuacion -= 5
+                actualizarPuntuacion()
+            }
             ocultarTopo()
-        }, 800)
+        }, 900)
     }
 
     fun ocultarTopo() {
@@ -90,19 +154,21 @@ class GameplayActivity : AppCompatActivity() {
         }
     }
 
-    fun iniciarJuego() {
-        handler.post(object : Runnable {
-            override fun run() {
-                if (juegoActivo) {
-                    mostrarTopo()
-                    handler.postDelayed(this, 1200)
-                }
-            }
-        })
-    }
-
     fun actualizarPuntuacion() {
         tvPuntuacion.text = "Puntuación: $puntuacion"
     }
 
+    fun iniciarTemporizador() {
+        handler.postDelayed({
+            juegoActivo = false
+            ocultarTopo()
+
+            android.app.AlertDialog.Builder(this)
+                .setTitle("Fin del juego")
+                .setMessage("Nivel: $nivel\nPuntuación: $puntuacion")
+                .setPositiveButton("OK") { _, _ -> finish() }
+                .show()
+
+        }, duracion)
+    }
 }

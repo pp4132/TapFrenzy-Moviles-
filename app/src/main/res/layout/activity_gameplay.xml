@@ -29,7 +29,7 @@
         android:layout_row="0"
         android:layout_column="1"
         android:layout_marginTop="64dp"
-        android:text="Nivel ## o Arcade"
+        android:text="Cargando..."
         android:textColor="#FFFFFF"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"

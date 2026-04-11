@@ -25,7 +25,10 @@ class ArcadeActivity : AppCompatActivity() {
         val btnJugar = findViewById<Button>(R.id.btnJugar)
 
         btnJugar.setOnClickListener {
+            btnJugar.isEnabled = false
+
             val intent = Intent(this, GameplayActivity::class.java)
+            intent.putExtra(GameplayActivity.EXTRA_MODO, GameplayActivity.MODO_ARCADE)
             startActivity(intent)
         }
 
