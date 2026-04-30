@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TapFrenzy">
         <activity
+            android:name=".GameAPP.PerfilActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GameAPP.LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".GameAPP.GameplayActivity"
             android:exported="false" />
         <activity
@@ -25,6 +31,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
