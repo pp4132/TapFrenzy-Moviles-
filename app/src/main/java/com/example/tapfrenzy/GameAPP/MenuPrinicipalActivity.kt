@@ -9,13 +9,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.tapfrenzy.R
+import android.widget.*
 
 class MenuPrinicipalActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val prefs = getSharedPreferences("Sesion", MODE_PRIVATE)
+/*        val prefs = getSharedPreferences("Sesion", MODE_PRIVATE)
         val idUsuario = prefs.getInt("IdUsuario", -1)
 
         if (idUsuario == -1) {
@@ -24,7 +25,7 @@ class MenuPrinicipalActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
             return
-        }
+        }*/
 
         enableEdgeToEdge()
         setContentView(R.layout.activity_menu_prinicipal)
@@ -33,6 +34,13 @@ class MenuPrinicipalActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val tvAlias = findViewById<TextView>(R.id.tvAlias)
+
+        val prefs = getSharedPreferences("Sesion", MODE_PRIVATE)
+        val alias = prefs.getString("Alias", "Jugador")
+
+        tvAlias.text = "Bienvenido $alias"
 
         val btnNiveles = findViewById<Button>(R.id.btnNiveles)
         val btnArcade = findViewById<Button>(R.id.btnArcade)
@@ -55,6 +63,10 @@ class MenuPrinicipalActivity : AppCompatActivity() {
         }
 
         btnSalir.setOnClickListener {
+            val prefs = getSharedPreferences("Sesion", MODE_PRIVATE)
+            prefs.edit().clear().apply()
+
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
 

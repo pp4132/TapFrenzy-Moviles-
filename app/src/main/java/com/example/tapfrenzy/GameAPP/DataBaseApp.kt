@@ -35,6 +35,46 @@ class DBHelper(context: Context) :
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        // Por ahora vacío
+        db.execSQL("DROP TABLE IF EXISTS Partidas")
+        db.execSQL("DROP TABLE IF EXISTS Usuarios")
+        onCreate(db)
+    }
+
+    fun insertarUsuario(
+        nombre: String,
+        alias: String,
+        contrasena: String,
+        fechaNacimiento: String
+    ): Long {
+        val db = writableDatabase
+
+        val values = android.content.ContentValues().apply {
+            put("Nombre_completo", nombre)
+            put("Alias", alias)
+            put("Contrasena", contrasena)
+            put("Fecha_nacimiento", fechaNacimiento)
+        }
+
+        return db.insert("Usuarios", null, values)
+    }
+
+    fun existeAlias(alias: String): Boolean {
+        val db = readableDatabase
+        val cursor = db.rawQuery(
+            "SELECT 1 FROM Usuarios WHERE Alias = ?",
+            arrayOf(alias)
+        )
+
+        val existe = cursor.moveToFirst()
+        cursor.close()
+        return existe
+    }
+
+    fun hashPassword(password: String): String {
+        val bytes = java.security.MessageDigest
+            .getInstance("SHA-256")
+            .digest(password.toByteArray())
+
+        return bytes.joinToString("") { "%02x".format(it) }
     }
 }

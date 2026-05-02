@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tapfrenzy.R
+import com.example.tapfrenzy.GameAPP.DBHelper
+import com.example.tapfrenzy.GameAPP.RegisterActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -21,6 +23,13 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        val prefs = getSharedPreferences("Sesion", Context.MODE_PRIVATE)
+        val idUsuario = prefs.getInt("IdUsuario", -1)
+
+        if (idUsuario != -1) {
+            startActivity(Intent(this, MenuPrinicipalActivity::class.java))
+            finish()
+        }
         dbHelper = DBHelper(this)
 
         etAlias = findViewById(R.id.etAlias)
@@ -33,19 +42,26 @@ class LoginActivity : AppCompatActivity() {
         }
 
         btnRegistro.setOnClickListener {
-            registrar()
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
     }
 
     private fun login() {
-        val alias = etAlias.text.toString()
-        val pass = etPassword.text.toString()
+        val alias = etAlias.text.toString().trim()
+        val pass = etPassword.text.toString().trim()
+
+        if (alias.isEmpty() || pass.isEmpty()) {
+            Toast.makeText(this, "Completa todos los campos", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val passHash = dbHelper.hashPassword(pass)
 
         val db = dbHelper.readableDatabase
 
         val cursor = db.rawQuery(
             "SELECT Id_Usuario FROM Usuarios WHERE Alias=? AND Contrasena=?",
-            arrayOf(alias, pass)
+            arrayOf(alias, passHash)
         )
 
         if (cursor.moveToFirst()) {
@@ -64,56 +80,6 @@ class LoginActivity : AppCompatActivity() {
         cursor.close()
     }
 
-    private fun registrar() {
-        val alias = etAlias.text.toString().trim()
-        val pass = etPassword.text.toString().trim()
-
-        if (alias.isEmpty() || pass.isEmpty()) {
-            Toast.makeText(this, "Completa todos los campos", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        if (pass.length < 4) {
-            Toast.makeText(this, "La contraseña debe tener al menos 4 caracteres", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        val db = dbHelper.writableDatabase
-
-        // Verificar si el alias ya existe
-        val cursor = db.rawQuery(
-            "SELECT Id_Usuario FROM Usuarios WHERE Alias=?",
-            arrayOf(alias)
-        )
-
-        if (cursor.moveToFirst()) {
-            Toast.makeText(this, "El alias ya está en uso", Toast.LENGTH_SHORT).show()
-            cursor.close()
-            return
-        }
-        cursor.close()
-
-        val values = ContentValues().apply {
-            put("Nombre_completo", alias) // luego puedes cambiar esto
-            put("Alias", alias)
-            put("Contrasena", pass)
-        }
-
-        val resultado = db.insert("Usuarios", null, values)
-
-        if (resultado != -1L) {
-            Toast.makeText(this, "Usuario registrado correctamente", Toast.LENGTH_SHORT).show()
-
-            // 🔥 Opcional: loguear automáticamente después de registrar
-            guardarSesion(resultado.toInt(), alias)
-
-            startActivity(Intent(this, MenuPrinicipalActivity::class.java))
-            finish()
-
-        } else {
-            Toast.makeText(this, "Error al registrar", Toast.LENGTH_SHORT).show()
-        }
-    }
 
     private fun guardarSesion(idUsuario: Int, alias: String) {
         val prefs = getSharedPreferences("Sesion", Context.MODE_PRIVATE)
