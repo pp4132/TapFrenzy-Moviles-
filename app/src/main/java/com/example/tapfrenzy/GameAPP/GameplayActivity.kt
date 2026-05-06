@@ -85,10 +85,18 @@ class GameplayActivity : AppCompatActivity() {
         agujeros.forEachIndexed { index, boton ->
             boton.setOnClickListener {
                 if (index == indiceTopoActual && indiceTopoActual != -1) {
+
                     puntuacion += 10
                     topoGolpeado = true
+
                     actualizarPuntuacion()
-                    ocultarTopo()
+
+                    agujeros[index]
+                        .setImageResource(R.drawable.topo_golpeado)
+
+                    handler.postDelayed({
+                        ocultarTopo()
+                    }, 200)
                 }
             }
         }
@@ -129,27 +137,29 @@ class GameplayActivity : AppCompatActivity() {
         if (!juegoActivo) return
 
         ocultarTopo()
+
         indiceTopoActual = (0..8).random()
         topoGolpeado = false
 
-        agujeros[indiceTopoActual].setBackgroundColor(
-            getColor(android.R.color.holo_green_light)
-        )
+        agujeros[indiceTopoActual].setImageResource(R.drawable.topo)
 
         handler.postDelayed({
             if (!topoGolpeado && indiceTopoActual != -1) {
                 puntuacion -= 5
                 actualizarPuntuacion()
             }
+
             ocultarTopo()
+
         }, 900)
     }
 
     fun ocultarTopo() {
         if (indiceTopoActual != -1) {
-            agujeros[indiceTopoActual].setBackgroundColor(
-                getColor(android.R.color.darker_gray)
-            )
+
+            agujeros[indiceTopoActual]
+                .setImageResource(R.drawable.agujero)
+
             indiceTopoActual = -1
         }
     }

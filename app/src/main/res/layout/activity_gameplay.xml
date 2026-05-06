@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#121212">
+    android:background="#4e3b31 ">
 
     <TextView
         android:id="@+id/tvPuntuacion"
@@ -39,18 +39,19 @@
 
     <ImageButton
         android:id="@+id/btnBack"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_margin="180dp"
-        android:layout_marginStart="180dp"
-        android:layout_marginBottom="196dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_margin="16dp"
+        android:layout_marginStart="184dp"
+        android:layout_marginTop="732dp"
         android:background="@android:color/transparent"
         android:contentDescription="Botón regresar"
         android:scaleType="centerInside"
+
         android:src="@android:drawable/ic_media_previous"
-        app:tint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#FFFFFF" />
 
     <GridLayout
         android:id="@+id/gridAgujeros"
@@ -74,63 +75,81 @@
             android:id="@+id/btnAgujero1"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@android:color/darker_gray"
+            android:background="@android:color/transparent"
+            android:src="@drawable/agujero"
+            android:scaleType="fitCenter"
             android:contentDescription="Agujero 1" />
 
         <ImageButton
             android:id="@+id/btnAgujero2"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@android:color/darker_gray"
+            android:background="@android:color/transparent"
+            android:src="@drawable/agujero"
+            android:scaleType="fitCenter"
             android:contentDescription="Agujero 2" />
 
         <ImageButton
             android:id="@+id/btnAgujero3"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@android:color/darker_gray"
+            android:background="@android:color/transparent"
+            android:src="@drawable/agujero"
+            android:scaleType="fitCenter"
             android:contentDescription="Agujero 3" />
 
         <ImageButton
             android:id="@+id/btnAgujero4"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@android:color/darker_gray"
+            android:background="@android:color/transparent"
+            android:src="@drawable/agujero"
+            android:scaleType="fitCenter"
             android:contentDescription="Agujero 4" />
 
         <ImageButton
             android:id="@+id/btnAgujero5"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@android:color/darker_gray"
+            android:background="@android:color/transparent"
+            android:src="@drawable/agujero"
+            android:scaleType="fitCenter"
             android:contentDescription="Agujero 5" />
 
         <ImageButton
             android:id="@+id/btnAgujero6"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@android:color/darker_gray"
+            android:background="@android:color/transparent"
+            android:src="@drawable/agujero"
+            android:scaleType="fitCenter"
             android:contentDescription="Agujero 6" />
 
         <ImageButton
             android:id="@+id/btnAgujero7"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@android:color/darker_gray"
+            android:background="@android:color/transparent"
+            android:src="@drawable/agujero"
+            android:scaleType="fitCenter"
             android:contentDescription="Agujero 7" />
 
         <ImageButton
             android:id="@+id/btnAgujero8"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@android:color/darker_gray"
+            android:background="@android:color/transparent"
+            android:src="@drawable/agujero"
+            android:scaleType="fitCenter"
             android:contentDescription="Agujero 8" />
 
         <ImageButton
             android:id="@+id/btnAgujero9"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@android:color/darker_gray"
+            android:background="@android:color/transparent"
+            android:src="@drawable/agujero"
+            android:scaleType="fitCenter"
             android:contentDescription="Agujero 9" />
     </GridLayout>
 
