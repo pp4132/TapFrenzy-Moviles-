@@ -3,6 +3,7 @@ package com.example.tapfrenzy.GameAPP
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tapfrenzy.R
@@ -22,6 +23,11 @@ class RegisterActivity : AppCompatActivity() {
         val etPassword = findViewById<EditText>(R.id.etPassword)
         val etFecha = findViewById<EditText>(R.id.etFechaNacimiento)
         val btnRegistrar = findViewById<Button>(R.id.btnRegistrar)
+        val btnBack = findViewById<ImageButton>(R.id.btnBack)
+
+        btnBack.setOnClickListener {
+            finish()
+        }
 
         btnRegistrar.setOnClickListener {
 
@@ -29,6 +35,8 @@ class RegisterActivity : AppCompatActivity() {
             val alias = etAlias.text.toString().trim()
             val password = etPassword.text.toString().trim()
             val fecha = etFecha.text.toString().trim()
+
+
 
             // 🔍 Validaciones básicas
             if (nombre.isEmpty() || alias.isEmpty() || password.isEmpty() || fecha.isEmpty()) {

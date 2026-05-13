@@ -1,43 +1,55 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/Fondo">
 
     <LinearLayout
         android:orientation="vertical"
         android:padding="24dp"
+        android:layout_marginTop="300dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <EditText
             android:id="@+id/etNombre"
-            android:hint="Nombre completo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <EditText
-            android:id="@+id/etAlias"
-            android:hint="Alias"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:hint="Nombre completo" />
 
         <EditText
             android:id="@+id/etPassword"
-            android:hint="Contraseña"
-            android:inputType="textPassword"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:hint="Contraseña"
+            android:inputType="textPassword" />
 
         <EditText
             android:id="@+id/etFechaNacimiento"
-            android:hint="Fecha nacimiento (YYYY-MM-DD)"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:hint="Fecha nacimiento (YYYY-MM-DD)" />
+
+        <EditText
+            android:id="@+id/etAlias"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Alias" />
 
         <Button
             android:id="@+id/btnRegistrar"
-            android:text="Registrarse"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Registrarse" />
 
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_margin="16dp"
+            android:layout_marginStart="184dp"
+            android:layout_marginTop="732dp"
+            android:src="@drawable/baseline_arrow_back_24"
+            android:contentDescription="Botón regresar"
+            android:scaleType="centerInside" />
     </LinearLayout>
 </ScrollView>

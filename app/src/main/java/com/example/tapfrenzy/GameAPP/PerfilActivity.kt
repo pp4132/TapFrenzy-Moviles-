@@ -23,6 +23,11 @@ class PerfilActivity : AppCompatActivity() {
         tvAlias = findViewById(R.id.tvAlias)
         tvNombre = findViewById(R.id.tvNombre)
         btnCerrarSesion = findViewById(R.id.btnCerrarSesion)
+        val btnBack = findViewById<ImageButton>(R.id.btnBack)
+
+        btnBack.setOnClickListener {
+            finish()
+        }
 
         dbHelper = DBHelper(this)
 

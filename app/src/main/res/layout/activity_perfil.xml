@@ -5,10 +5,10 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/Fondo"
     tools:context=".GameAPP.PerfilActivity">
 
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -17,25 +17,36 @@
 
         <TextView
             android:id="@+id/tvNombre"
-            android:text="Nombre:"
-            android:textSize="20sp"
+            android:layout_width="165dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:text="Nombre:"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/tvAlias"
-            android:text="Alias:"
-            android:textSize="20sp"
+            android:layout_width="166dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:text="Alias:"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/btnCerrarSesion"
             android:text="Cerrar sesión"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_margin="16dp"
+            android:layout_marginStart="184dp"
+            android:layout_marginTop="732dp"
+            android:src="@drawable/baseline_arrow_back_24"
+            android:contentDescription="Botón regresar"
+            android:scaleType="centerInside"/>
 
     </LinearLayout>
 

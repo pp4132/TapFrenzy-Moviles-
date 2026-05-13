@@ -26,6 +26,12 @@ class LoginActivity : AppCompatActivity() {
         val prefs = getSharedPreferences("Sesion", Context.MODE_PRIVATE)
         val idUsuario = prefs.getInt("IdUsuario", -1)
 
+        val btnBack = findViewById<ImageButton>(R.id.btnBack)
+
+        btnBack.setOnClickListener {
+            finish()
+        }
+
         if (idUsuario != -1) {
             startActivity(Intent(this, MenuPrinicipalActivity::class.java))
             finish()
